@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Menu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .menu-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        .menu-option {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 20px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .menu-option:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="menu-container">
+        <h2>Main Menu</h2>
+        <button class="menu-option" onclick="option1()">HATDCODE</button>
+        <button class="menu-option" onclick="option2()">INPUT FROM KEYBORD</button>
+        <button class="menu-option" onclick="option3()">READ FROM FILE</button>
+        <button class="menu-option" onclick="option4()">MULTIPLE INPUTS</button>
+    </div>
+
+    <script>
+        function option1() {
+            window.location.href = "hardcode_method.html";
+            // Perform additional actions for Option 1
+        }
+
+        function option2() {
+            window.location.href = "input_from_user.html";
+            // Perform additional actions for Option 2
+        }
+
+        function option3() {
+            window.location.href = "input_from_user.html";
+            // Perform additional actions for Option 3
+        }
+
+        function option4() {
+            window.location.href = "input_from_user.html";
+            // Perform additional actions for Option 4
+        }
+    </script>
+
+</body>
+</html>
