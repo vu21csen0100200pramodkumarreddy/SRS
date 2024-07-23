@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Model</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .input-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        canvas {
+            margin-top: 20px;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <div class="input-container">
+        <h2>Weather Model</h2>
+        <label for="humidity">Humidity:</label>
+        <input type="text" id="humidity" required>
+        <br>
+        <label for="pressure">Pressure:</label>
+        <input type="text" id="pressure" required>
+        <br>
+        <label for="wind_speed">Wind Speed:</label>
+        <input type="text" id="wind_speed" required>
+        <br>
+        <button onclick="calculateAndDisplay()">Submit</button>
+    </div>
+
+    <canvas id="temperatureChart" width="400" height="300"></canvas>
+
+    <script>
+        function calculateAndDisplay() {
+            var humidity = parseFloat(document.getElementById('humidity').value);
+            var pressure = parseFloat(document.getElementById('pressure').value);
+            var wind_speed = parseFloat(document.getElementById('wind_speed').value);
+
+            var time_values = Array.from({ length: 11 }, (_, i) => i);
+            var temperature_values = time_values.map(function (t) {
+                return quadraticWeatherModel(t, humidity, pressure, wind_speed);
+            });
+
+            // Display the results in a Chart.js chart
+            displayChart(time_values, temperature_values);
+        }
+
+        function quadraticWeatherModel(time, humidity, pressure, wind_speed) {
+            return humidity * (time ** 2) + pressure * time + wind_speed;
+        }
+
+        function displayChart(labels, data) {
+            var ctx = document.getElementById('temperatureChart').getContext('2d');
+            var chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Temperature',
+                        data: data,
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 2,
+                        fill: false,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            type: 'linear',
+                            position: 'bottom',
+                        },
+                        y: {
+                            min: Math.min(...data) - 5,
+                            max: Math.max(...data) + 5,
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>
